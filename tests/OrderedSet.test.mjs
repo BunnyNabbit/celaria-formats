@@ -11,5 +11,7 @@ describe("OrderedSet", () => {
 		dogNames.delete("Jackson")
 		const ordered = dogNames.toArray()
 		expect(ordered).toEqual(["Rover", "Chase", "Zoey"])
+		expect(dogNames.indexOf("Zoey")).toBe(2)
+		expect(dogNames.indexOf("Jackson")).toBe(-1)
 	})
 })

@@ -32,6 +32,14 @@ export class OrderedSet {
 	}
 	/** @type {Map<any, number>} */
 	#map = new Map()
+	/**Return the position of the given {@link element} in the set. -1 if not present.
+	 *
+	 * @param {any} element
+	 * @returns {number}
+	 */
+	indexOf(element) {
+		return this.toArray().indexOf(element)
+	}
 	/** @type {number} */
 	#next = 0
 }
