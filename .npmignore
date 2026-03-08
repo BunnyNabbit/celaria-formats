@@ -2,3 +2,6 @@
 .gitattributes
 docs/
 docsTheme/
+tests/
+jest.config.mjs
+coverage/
