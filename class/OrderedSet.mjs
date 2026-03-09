@@ -1,5 +1,8 @@
 //@ts-check
-/** I'm a lazy implementation of an ordered set. */
+/** I'm a lazy implementation of an ordered set.
+ * 
+ * @template Value
+*/
 export class OrderedSet {
 	/** Increments {@link next} and returns its previous value. */
 	#increment() {
@@ -7,21 +10,21 @@ export class OrderedSet {
 	}
 	/**@todo Yet to be documented.
 	 *
-	 * @param {any} element
+	 * @param {Value} element
 	 */
 	delete(element) {
-		this.#map.delete(element)
+		return this.#map.delete(element)
 	}
 	/**@todo Yet to be documented.
 	 *
-	 * @param {any} element
+	 * @param {Value} element
 	 */
 	add(element) {
 		if (this.#map.has(element) == false) this.#map.set(element, this.#increment())
 	}
 	/**@todo Yet to be documented.
 	 *
-	 * @returns {any[]}
+	 * @returns {Value[]}
 	 */
 	toArray() {
 		const entries = []
@@ -30,7 +33,7 @@ export class OrderedSet {
 		}
 		return entries.sort((a, b) => a[1] - b[1]).map((entry) => entry[0])
 	}
-	/** @type {Map<any, number>} */
+	/** @type {Map<Value, number>} */
 	#map = new Map()
 	/**Return the position of the given {@link element} in the set. -1 if not present.
 	 *
