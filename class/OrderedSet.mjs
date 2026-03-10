@@ -1,8 +1,8 @@
 //@ts-check
-/** I'm a lazy implementation of an ordered set.
- * 
+/**I'm a lazy implementation of an ordered set.
+ *
  * @template Value
-*/
+ */
 export class OrderedSet {
 	/** Increments {@link next} and returns its previous value. */
 	#increment() {
