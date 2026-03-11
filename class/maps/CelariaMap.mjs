@@ -37,7 +37,8 @@ export class CelariaMap extends BaseCelariaMap {
 		map.mode = smartBuffer.readUInt8() // unused byte (is it really? it's used in validation inside the server code but not client)
 
 		const checkpointCount = smartBuffer.readInt8()
-
+		/** @type {{ priority: number; block: Block }[]} */
+		const checkpoints = []
 		map.medalTimes = [] // TODO: refactor into medal times
 
 		for (let i = 0; i < checkpointCount; i++) {
@@ -75,8 +76,17 @@ export class CelariaMap extends BaseCelariaMap {
 					}
 
 					block.rotation = smartBuffer.readFloatLE()
-
-					if (block.type === Block.types.checkpoint) block.checkpointId = smartBuffer.readUInt8()  //@TODO: fix
+					if (block.type === Block.types.checkpoint) {
+						checkpoints.push({
+							block,
+							priority: smartBuffer.readUInt8(),
+						})
+					} else if (block.type === Block.types.goal) {
+						checkpoints.push({
+							block,
+							priority: Number.MAX_SAFE_INTEGER,
+						})
+					}
 					map.instances.push(block)
 					break
 
@@ -171,6 +181,7 @@ export class CelariaMap extends BaseCelariaMap {
 					throw new Error(`Unknown instance type ${instanceType}.`)
 			}
 		}
+		checkpoints.sort((a, b) => a.priority - b.priority).forEach((sortedEntry) => map.checkpointOrder.add(sortedEntry.block))
 		return map
 	}
 	/** @todo Yet to be documented. */
@@ -304,8 +315,8 @@ export class CelariaMap extends BaseCelariaMap {
 
 		return output.toBuffer()
 	}
-	/**
-	 * @todo Yet to be documented.
+	/**@todo Yet to be documented.
+	 *
 	 * @param {Block} block
 	 * @param {SmartBuffer} buffer
 	 * @param {number} version
