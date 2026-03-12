@@ -11,11 +11,11 @@ export class CelariaMap extends BaseCelariaMap {
 	/**/
 	constructor() {
 		super()
-		this.mode = 0
+		this.mode = CelariaMap.gameModes.timeTrial
 	}
 	static gameModes = {
-		timeTrial: 0,
-		freeRoam: 1,
+		freeRoam: 0,
+		timeTrial: 1,
 	}
 	/**@todo Yet to be documented.
 	 *
@@ -183,7 +183,7 @@ export class CelariaMap extends BaseCelariaMap {
 		output.writeString(mapName)
 
 		if (version == 0) output.writeUInt8(0) // unused byte
-		output.writeUInt8(1) // Mode byte: Must be 1 for Celaria server (Java) to work. Otherwise doesn't matter
+		output.writeUInt8(this.mode) // Mode byte: Must be 1 for Celaria server (Java) to work. Otherwise doesn't matter
 
 		const existingCheckpoints = new Set(this.checkpointOrder.toArray())
 		output.writeUInt8(existingCheckpoints.size)
