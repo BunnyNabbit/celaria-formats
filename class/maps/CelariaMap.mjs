@@ -129,15 +129,9 @@ export class CelariaMap extends BaseCelariaMap {
 					const barrier = new Barrier()
 					smartBuffer.readUInt8() // unused byte
 
-					if (map.version >= 2) {
-						barrier.position = [smartBuffer.readInt32LE() / 10, smartBuffer.readInt32LE() / 10, smartBuffer.readUInt32LE() / 10]
+					barrier.position = [smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE()]
 
-						barrier.scale = [smartBuffer.readUInt32LE() / 10, 0, smartBuffer.readUInt32LE() / 10]
-					} else {
-						barrier.position = [smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE()]
-
-						barrier.scale = [smartBuffer.readDoubleLE(), 0, smartBuffer.readDoubleLE()]
-					}
+					barrier.scale = [smartBuffer.readDoubleLE(), 0, smartBuffer.readDoubleLE()]
 
 					barrier.rotation = smartBuffer.readFloatLE()
 					map.instances.push(barrier)
@@ -148,15 +142,9 @@ export class CelariaMap extends BaseCelariaMap {
 					const barrier = new Barrier()
 					smartBuffer.readUInt8() // unused byte
 
-					if (map.version >= 2) {
-						barrier.position = [smartBuffer.readInt32LE() / 10, smartBuffer.readInt32LE() / 10, smartBuffer.readUInt32LE() / 10]
+					barrier.position = [smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE()]
 
-						barrier.scale = [smartBuffer.readUInt32LE() / 10, smartBuffer.readUInt32LE() / 10, 0]
-					} else {
-						barrier.position = [smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE()]
-
-						barrier.scale = [smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE(), 0]
-					}
+					barrier.scale = [smartBuffer.readDoubleLE(), smartBuffer.readDoubleLE(), 0]
 
 					barrier.rotation = smartBuffer.readFloatLE()
 					map.instances.push(barrier)
@@ -269,42 +257,24 @@ export class CelariaMap extends BaseCelariaMap {
 				case 3: // Barrier (wall)
 					output.writeUInt8(0) // unused byte
 
-					if (version === 3) {
-						output.writeInt32LE(instance.position[0] * 10)
-						output.writeInt32LE(instance.position[1] * 10)
-						output.writeUInt32LE(instance.position[2] * 10)
+					output.writeDoubleLE(instance.position[0])
+					output.writeDoubleLE(instance.position[1])
+					output.writeDoubleLE(instance.position[2])
 
-						output.writeUInt32LE(instance.scale[0] * 10)
-						output.writeUInt32LE(instance.scale[2] * 10)
-					} else {
-						output.writeDoubleLE(instance.position[0])
-						output.writeDoubleLE(instance.position[1])
-						output.writeDoubleLE(instance.position[2])
-
-						output.writeDoubleLE(instance.scale[0])
-						output.writeDoubleLE(instance.scale[2])
-					}
+					output.writeDoubleLE(instance.scale[0])
+					output.writeDoubleLE(instance.scale[2])
 
 					output.writeFloatLE(instance.rotation)
 					break
 				case 4: // Barrier (floor)
 					output.writeUInt8(0) // unused byte
 
-					if (version === 3) {
-						output.writeInt32LE(instance.position[0] * 10)
-						output.writeInt32LE(instance.position[1] * 10)
-						output.writeUInt32LE(instance.position[2] * 10)
+					output.writeDoubleLE(instance.position[0])
+					output.writeDoubleLE(instance.position[1])
+					output.writeDoubleLE(instance.position[2])
 
-						output.writeUInt32LE(instance.scale[0] * 10)
-						output.writeUInt32LE(instance.scale[1] * 10)
-					} else {
-						output.writeDoubleLE(instance.position[0])
-						output.writeDoubleLE(instance.position[1])
-						output.writeDoubleLE(instance.position[2])
-
-						output.writeDoubleLE(instance.scale[0])
-						output.writeDoubleLE(instance.scale[1])
-					}
+					output.writeDoubleLE(instance.scale[0])
+					output.writeDoubleLE(instance.scale[1])
 
 					output.writeFloatLE(instance.rotation)
 					break
