@@ -1,3 +1,4 @@
+export * from "./class/maps/CelariaMap.mjs"
 export * from "./class/maps/EditableCelariaMap.mjs"
 export * from "./class/maps/objects/Barrier.mjs"
 export * from "./class/maps/objects/Block.mjs"
