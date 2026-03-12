@@ -6,7 +6,7 @@ export class PlayerSpawnPoint extends Instance {
 	/** @todo Yet to be documented. */
 	constructor() {
 		super()
-		/**@todo Yet to be documented.
+		/**The rotation of the object I represent.
 		 *
 		 * @type {number}
 		 */

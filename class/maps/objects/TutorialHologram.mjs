@@ -12,10 +12,16 @@ export class TutorialHologram extends Instance {
 		super()
 		/** @type {number} */
 		this.type = type
-		/** @type {Vector3} */
-		this.scale = [0, 0, 0]
-		/** @type {number} */
+		/**The rotation of the object I represent.
+		 *
+		 * @type {number}
+		 */
 		this.rotation = 0
+		/**The scale of the object I represent.
+		 *
+		 * @type {Vector3}
+		 */
+		this.scale = [0, 0, 0]
 	}
 	/** @returns {128} */
 	get instanceId() {

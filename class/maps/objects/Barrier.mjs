@@ -2,17 +2,20 @@
 import { Instance } from "./Instance.mjs"
 /** @import {FlatVector3} from "../../../types/data.mts" */
 
-/** @todo Yet to be documented. */
+/**I slow down pesky lizards who pass me.
+ *
+ * I may be a wall or a floor depending on how my {@link scale} is formed. If my {@link scale} is neither and an attempt to serialize me is made, an {@link Error} is thrown.
+ */
 export class Barrier extends Instance {
 	/** @todo Yet to be documented. */
 	constructor() {
 		super()
-		/**@todo Yet to be documented.
+		/**The rotation of the object I represent.
 		 *
 		 * @type {number}
 		 */
 		this.rotation = 0
-		/**@todo Yet to be documented.
+		/**The scale of the object I represent.
 		 *
 		 * @type {FlatVector3}
 		 */

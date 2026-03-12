@@ -2,17 +2,23 @@
 import { Instance } from "./Instance.mjs"
 /** @import {Vector3} from "../../../types/data.mts" */
 
-/** I represent a block. */
+/** I represent solid geometry in the form of rectangular prisms.. */
 export class Block extends Instance {
-	/** @todo Yet to be documented.
-	 * 
-	 * @param {number} [type=Block.types.plain]
-	*/
+	/**@todo Yet to be documented.
+	 *
+	 * @param {number} [type=Block.types.plain] Default is `Block.types.plain`
+	 */
 	constructor(type = Block.types.plain) {
 		super()
-		/** @type {number} */
+		/**The rotation of the object I represent.
+		 *
+		 * @type {number}
+		 */
 		this.rotation = 0
-		/** @type {Vector3} */
+		/**The scale of the object I represent.
+		 *
+		 * @type {Vector3}
+		 */
 		this.scale = [2, 2, 2]
 		/**@todo Yet to be documented.
 		 *
