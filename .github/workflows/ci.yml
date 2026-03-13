@@ -27,9 +27,9 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm test
-      - name: Type check
-        run: pnpm run type-check
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         with:
           fail-on-error: false
+      - name: Type check
+        run: pnpm run type-check
