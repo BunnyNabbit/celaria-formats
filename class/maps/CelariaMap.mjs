@@ -39,9 +39,11 @@ export class CelariaMap extends BaseCelariaMap {
 		const checkpointCount = smartBuffer.readInt8()
 		/** @type {{ priority: number; block: Block }[]} */
 		const checkpoints = []
+		// @ts-ignore see https://github.com/BunnyNabbit/celaria-formats/issues/12
 		map.medalTimes = [] // TODO: refactor into medal times
 
 		for (let i = 0; i < checkpointCount; i++) {
+			// @ts-ignore see https://github.com/BunnyNabbit/celaria-formats/issues/12
 			map.medalTimes.push({
 				platin: smartBuffer.readUInt32LE(),
 				gold: smartBuffer.readUInt32LE(),
