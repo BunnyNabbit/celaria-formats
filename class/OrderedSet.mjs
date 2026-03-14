@@ -8,21 +8,22 @@ export class OrderedSet {
 	#increment() {
 		return this.#next++
 	}
-	/**@todo Yet to be documented.
+	/**Removes an {@link element} from the set.
 	 *
 	 * @param {Value} element
+	 * @returns 
 	 */
 	delete(element) {
 		return this.#map.delete(element)
 	}
-	/**@todo Yet to be documented.
+	/**Adds an {@link element} to the set. Subsequent insertions do not æffect the element's order in the set.
 	 *
 	 * @param {Value} element
 	 */
 	add(element) {
 		if (this.#map.has(element) == false) this.#map.set(element, this.#increment())
 	}
-	/**@todo Yet to be documented.
+	/**Returns an ordered array of the set.
 	 *
 	 * @returns {Value[]}
 	 */
