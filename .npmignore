@@ -5,3 +5,5 @@ docsTheme/
 tests/
 jest.config.mjs
 coverage/
+AGENTS.md
+CONTRIBUTING.md
