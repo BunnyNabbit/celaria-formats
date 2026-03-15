@@ -6,7 +6,8 @@ import { Barrier } from "./objects/Barrier.mjs"
 import { Sphere } from "./objects/Sphere.mjs"
 import { TutorialHologram } from "./objects/TutorialHologram.mjs"
 import { BaseCelariaMap } from "./BaseCelariaMap.mjs"
-/** @todo Yet to be documented. */
+/** @import {CelariaMap} from "./CelariaMap.mjs" */
+/** I represent an editable Celaria map openable in the game's map editor. I am yet to be finalized into a {@link CelariaMap}. */
 export class EditableCelariaMap extends BaseCelariaMap {
 	/**/
 	constructor() {
@@ -161,11 +162,12 @@ export class EditableCelariaMap extends BaseCelariaMap {
 		checkpoints.sort((a, b) => a.priority - b.priority).forEach((sortedEntry) => map.checkpointOrder.add(sortedEntry.block))
 		return map
 	}
-	/**@todo Yet to be documented.
+	/**Serializes the map into a buffer.
 	 *
-	 *   Checkpoints and goal blocks are modified in place if they aren't specified in my {@link checkpointOrder}. And the blocks that are will also be modified.
+	 * Checkpoints and goal blocks are modified in place if they aren't specified in my {@link checkpointOrder}. And the blocks that are will also be modified.
 	 *
 	 * @param {number} version
+	 * @throws {Error} If a {@link Barrier} can't figure out if it's a wall or a floor.
 	 */
 	serialize(version) {
 		if (typeof version === "undefined") throw new Error("No version defined.")

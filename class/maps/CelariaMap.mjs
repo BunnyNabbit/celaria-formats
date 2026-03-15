@@ -6,8 +6,9 @@ import { PlayerSpawnPoint } from "./objects/PlayerSpawnPoint.mjs"
 import { Barrier } from "./objects/Barrier.mjs"
 import { Sphere } from "./objects/Sphere.mjs"
 import { TutorialHologram } from "./objects/TutorialHologram.mjs"
+/** @import {EditableCelariaMap} from "./EditableCelariaMap.mjs" */
 /** @import {MedalTimes} from "../../types/data.mts" */
-/** @todo Yet to be documented. */
+/** I represent a Celaria map. Unlike {@link EditableCelariaMap}, my checkpoint and goal {@link Block | blocks} include {@link Block.medalTimes | medal times}. */
 export class CelariaMap extends BaseCelariaMap {
 	/**/
 	constructor() {
@@ -18,10 +19,12 @@ export class CelariaMap extends BaseCelariaMap {
 		freeRoam: 0,
 		timeTrial: 1,
 	}
-	/**@todo Yet to be documented.
+	/**Parses a buffer into a {@link CelariaMap}.
 	 *
-	 * @param {Buffer} buffer
-	 * @returns
+	 * @param {Buffer} buffer - The buffer to parse.
+	 * @returns {CelariaMap}
+	 * @throws {Error} If a checkpoint or goal {@link Block} is missing its {@link Block.medalTimes}
+	 * @throws {Error} If a {@link Barrier} can't figure out if it's a wall or a floor.
 	 */
 	static parse(buffer) {
 		/** @type {CelariaMap} */
@@ -180,8 +183,13 @@ export class CelariaMap extends BaseCelariaMap {
 			})
 		return map
 	}
-	/** @todo Yet to be documented. */
-	serialize(version = 3) {
+	/**Serializes the map into a buffer.
+	 *
+	 * Checkpoints and goal blocks are modified in place if they aren't specified in my {@link checkpointOrder}. And the blocks that are will also be modified.
+	 *
+	 * @param {number} [version=2] Default is `2`
+	 */
+	serialize(version = 2) {
 		const output = new SmartBuffer()
 		output.writeString(CelariaMap.fileSignature)
 		output.writeUInt8(version) // Version

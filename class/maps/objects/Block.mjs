@@ -7,7 +7,7 @@ import { Instance } from "./Instance.mjs"
  */
 /** @import {CelariaMap} from "../CelariaMap.mjs" */
 
-/** I represent solid geometry in the form of rectangular prisms.. */
+/** I represent solid geometry in the form of rectangular prisms. */
 export class Block extends Instance {
 	/**@todo Yet to be documented.
 	 *
@@ -37,32 +37,32 @@ export class Block extends Instance {
 		this.medalTimes
 	}
 	static types = {
-		/**@todo Yet to be documented.
+		/**I'm standard level geometry.
 		 *
 		 * @type {0}
 		 */
 		plain: 0,
-		/**@todo Yet to be documented.
+		/**I'm red and I'm the goal of a map. Or the space above me, that is.
 		 *
 		 * @type {1}
 		 */
 		goal: 1,
-		/**@todo Yet to be documented.
+		/**I'm green. I let the player jump higher if they're touching me.
 		 *
 		 * @type {2}
 		 */
 		jump: 2,
-		/**@todo Yet to be documented.
+		/**I'm yellow. I speed up players who walk on me.
 		 *
 		 * @type {3}
 		 */
 		speed: 3,
-		/**@todo Yet to be documented.
+		/**I'm blue. It's difficult to walk on and climb on me.
 		 *
 		 * @type {4}
 		 */
 		ice: 4,
-		/**@todo Yet to be documented.
+		/**I've been purple. But lately I'm red. I represent checkpoints of a map.
 		 *
 		 * @type {5}
 		 */
