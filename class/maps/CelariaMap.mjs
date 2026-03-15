@@ -34,7 +34,7 @@ export class CelariaMap extends BaseCelariaMap {
 		if (magic !== CelariaMap.fileSignature) throw new Error("Magic mismatch.")
 		map.version = smartBuffer.readUInt8() // Version
 
-		map.name = smartBuffer.readString(smartBuffer.readUInt8())
+		map.name = smartBuffer.readString(smartBuffer.readUInt8(), "ascii")
 
 		if (map.version == 0) smartBuffer.readInt8() // unused byte
 
@@ -191,7 +191,7 @@ export class CelariaMap extends BaseCelariaMap {
 	 */
 	serialize(version = 2) {
 		const output = new SmartBuffer()
-		output.writeString(CelariaMap.fileSignature)
+		output.writeString(CelariaMap.fileSignature, "ascii")
 		output.writeUInt8(version) // Version
 
 		const mapName = this.name

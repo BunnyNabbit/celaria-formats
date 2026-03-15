@@ -34,7 +34,7 @@ export class EditableCelariaMap extends BaseCelariaMap {
 		if (magic !== EditableCelariaMap.fileSignature) throw new Error("Magic mismatch.")
 		map.version = smartBuffer.readUInt8() // Version
 
-		map.name = smartBuffer.readString(smartBuffer.readUInt8())
+		map.name = smartBuffer.readString(smartBuffer.readUInt8(), "ascii")
 
 		smartBuffer.readUInt8() // unused byte
 		smartBuffer.readUInt8() // unused byte
@@ -185,7 +185,7 @@ export class EditableCelariaMap extends BaseCelariaMap {
 	serialize(version) {
 		if (typeof version === "undefined") throw new Error("No version defined.")
 		const output = new SmartBuffer()
-		output.writeString(EditableCelariaMap.fileSignature)
+		output.writeString(EditableCelariaMap.fileSignature, "ascii")
 		output.writeUInt8(version) // Version
 
 		output.writeUInt8(this.name.length)

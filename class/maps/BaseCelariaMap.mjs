@@ -1,4 +1,5 @@
 // @ts-check
+import { SmartBuffer } from "smart-buffer"
 import { OrderedSet } from "../OrderedSet.mjs"
 /** @import {Vector3} from "../../types/data.mts" */
 /** @import {Block} from "./objects/Block.mjs" */
@@ -37,9 +38,10 @@ export class BaseCelariaMap {
 	#name = ""
 	/** @type {string} */
 	static fileSignature = ""
-
+	/** @throws {Error} If {@link newName} is longer than 255 characters. */
 	set name(newName) {
-		// TODO: validate string length (256)
+		const buffer = new SmartBuffer().writeString(newName, "ascii")
+		if (buffer.length > 255) throw new Error("New name is longer than 255 bytes.")
 		this.#name = newName
 	}
 
