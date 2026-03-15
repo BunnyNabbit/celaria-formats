@@ -46,6 +46,4 @@ export class BaseCelariaMap {
 	get name() {
 		return this.#name
 	}
-	/** @type {string} */
-	static formatMagicString
 }
