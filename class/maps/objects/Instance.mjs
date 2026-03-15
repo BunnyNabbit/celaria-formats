@@ -11,7 +11,7 @@ export class Instance {
 		 */
 		this.position = [0, 0, 0]
 	}
-	/**@todo Yet to be documented.
+	/**Gets the instance type for serialization.
 	 *
 	 * @abstract
 	 * @returns {number}

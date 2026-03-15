@@ -9,7 +9,7 @@ import { Instance } from "./Instance.mjs"
 
 /** I represent solid geometry in the form of rectangular prisms. */
 export class Block extends Instance {
-	/**@todo Yet to be documented.
+	/**Creates an instance of a {@link Block}.
 	 *
 	 * @param {number} [type=Block.types.plain] Default is `Block.types.plain`
 	 */
@@ -25,7 +25,7 @@ export class Block extends Instance {
 		 * @type {Vector3}
 		 */
 		this.scale = [2, 2, 2]
-		/**@todo Yet to be documented.
+		/**My block {@link Block.types | type}. Sometimes this gets overridden during map serialization.
 		 *
 		 * @type {number}
 		 */

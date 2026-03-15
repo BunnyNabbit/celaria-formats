@@ -7,7 +7,20 @@ import { Sphere } from "./objects/Sphere.mjs"
 import { TutorialHologram } from "./objects/TutorialHologram.mjs"
 import { BaseCelariaMap } from "./BaseCelariaMap.mjs"
 /** @import {CelariaMap} from "./CelariaMap.mjs" */
-/** I represent an editable Celaria map openable in the game's map editor. I am yet to be finalized into a {@link CelariaMap}. */
+/**I represent an editable Celaria map openable in the game's map editor. I am yet to be finalized into a {@link CelariaMap}.
+ *
+ * @example Parsing a map to turn all blocks into speed blocks.
+ *
+ * ```js
+ * import fs from "node:fs"
+ * import { Block } from "celaria-formats/class/maps/objects/Block.mjs"
+ * import { EditableCelariaMap } from "celaria-formats/class/maps/EditableCelariaMap.mjs"
+ *
+ * const myMap = EditableCelariaMap.parse(fs.readFileSync("./myMap.cmap"))
+ * myMap.instances.filter(instance => instance.instanceId == 0).forEach(block => block.type = Block.types.speed)
+ * const output = myMap.serialize(4)
+ * ```
+ */
 export class EditableCelariaMap extends BaseCelariaMap {
 	/**/
 	constructor() {

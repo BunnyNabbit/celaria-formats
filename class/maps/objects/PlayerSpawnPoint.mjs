@@ -1,9 +1,9 @@
 // @ts-check
 import { Instance } from "./Instance.mjs"
 
-/** @todo Yet to be documented. */
+/** I mark the lizard spawn. */
 export class PlayerSpawnPoint extends Instance {
-	/** @todo Yet to be documented. */
+	/** Creates an instance of a {@link PlayerSpawnPoint}. */
 	constructor() {
 		super()
 		/**The rotation of the object I represent.

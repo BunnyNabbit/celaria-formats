@@ -2,9 +2,9 @@
 /** @import {Vector3} from "../../../types/data.mts" */
 import Instance from "./Instance.mjs"
 
-/** @todo Yet to be documented. */
+/** I'm a dummy object. */
 export class TutorialHologram extends Instance {
-	/**@todo Yet to be documented.
+	/**Creates a new instance of a {@link TutorialHologram}
 	 *
 	 * @param {number} type
 	 */

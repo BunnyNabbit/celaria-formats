@@ -7,7 +7,7 @@ import { Instance } from "./Instance.mjs"
  * I may be a wall or a floor depending on how my {@link scale} is formed. If my {@link scale} is neither and an attempt to serialize me is made, an {@link Error} is thrown.
  */
 export class Barrier extends Instance {
-	/** @todo Yet to be documented. */
+	/** Creates an instance of a {@link Barrier}. */
 	constructor() {
 		super()
 		/**The rotation of the object I represent.

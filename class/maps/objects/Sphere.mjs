@@ -2,9 +2,9 @@
 /** @import {Vector3} from "../../../types/data.mts" */
 import { Instance } from "./Instance.mjs"
 
-/** @todo Yet to be documented. */
+/** I am a collectible in the form of a red sphere. I was probably called a gem before. Can't remember. */
 export class Sphere extends Instance {
-	/** @todo Yet to be documented. */
+	/** Creates an instance of a {@link Sphere}. */
 	constructor() {
 		super()
 	}
