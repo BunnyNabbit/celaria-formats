@@ -1,6 +1,11 @@
 // @ts-check
 import { Instance } from "./Instance.mjs"
-/** @import {Vector3} from "../../../types/data.mts" */
+/**@import {
+ *   MedalTimes,
+ *   Vector3
+ * } from "../../../types/data.mts"
+ */
+/** @import {CelariaMap} from "../CelariaMap.mjs" */
 
 /** I represent solid geometry in the form of rectangular prisms.. */
 export class Block extends Instance {
@@ -25,6 +30,11 @@ export class Block extends Instance {
 		 * @type {number}
 		 */
 		this.type = type
+		/**The medal times associated with the goal or checkpoint. Populated and required by {@link CelariaMap}.
+		 *
+		 * @type {MedalTimes}
+		 */
+		this.medalTimes
 	}
 	static types = {
 		/**@todo Yet to be documented.

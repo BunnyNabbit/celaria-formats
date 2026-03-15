@@ -6,6 +6,7 @@ import { PlayerSpawnPoint } from "./objects/PlayerSpawnPoint.mjs"
 import { Barrier } from "./objects/Barrier.mjs"
 import { Sphere } from "./objects/Sphere.mjs"
 import { TutorialHologram } from "./objects/TutorialHologram.mjs"
+/** @import {MedalTimes} from "../../types/data.mts" */
 /** @todo Yet to be documented. */
 export class CelariaMap extends BaseCelariaMap {
 	/**/
@@ -39,13 +40,12 @@ export class CelariaMap extends BaseCelariaMap {
 		const checkpointCount = smartBuffer.readInt8()
 		/** @type {{ priority: number; block: Block }[]} */
 		const checkpoints = []
-		// @ts-ignore see https://github.com/BunnyNabbit/celaria-formats/issues/12
-		map.medalTimes = [] // TODO: refactor into medal times
+		/** @type {MedalTimes[]} */
+		const medalTimes = []
 
 		for (let i = 0; i < checkpointCount; i++) {
-			// @ts-ignore see https://github.com/BunnyNabbit/celaria-formats/issues/12
-			map.medalTimes.push({
-				platin: smartBuffer.readUInt32LE(),
+			medalTimes.push({
+				platinum: smartBuffer.readUInt32LE(),
 				gold: smartBuffer.readUInt32LE(),
 				silver: smartBuffer.readUInt32LE(),
 				bronze: smartBuffer.readUInt32LE(),
@@ -171,7 +171,13 @@ export class CelariaMap extends BaseCelariaMap {
 					throw new Error(`Unknown instance type ${instanceType}.`)
 			}
 		}
-		checkpoints.sort((a, b) => a.priority - b.priority).forEach((sortedEntry) => map.checkpointOrder.add(sortedEntry.block))
+		checkpoints
+			.sort((a, b) => a.priority - b.priority)
+			.forEach((sortedEntry, index) => {
+				map.checkpointOrder.add(sortedEntry.block)
+				if (!medalTimes[index]) throw new Error("Missing Block#medalTimes on checkpoint/goal.")
+				sortedEntry.block.medalTimes = medalTimes[index]
+			})
 		return map
 	}
 	/** @todo Yet to be documented. */
@@ -187,14 +193,15 @@ export class CelariaMap extends BaseCelariaMap {
 		if (version == 0) output.writeUInt8(0) // unused byte
 		output.writeUInt8(this.mode) // Mode byte: Must be 1 for Celaria server (Java) to work. Otherwise doesn't matter
 
-		const existingCheckpoints = new Set(this.checkpointOrder.toArray())
+		const checkpoints = this.checkpointOrder.toArray()
+		const existingCheckpoints = new Set(checkpoints)
 		output.writeUInt8(existingCheckpoints.size)
-		for (let i = 0; i < existingCheckpoints.size; i++) {
-			// Purposefully have impossible to beat times for maps written by cmapLib.js @TODO: medal times
-			output.writeUInt32LE(1)
-			output.writeUInt32LE(2)
-			output.writeUInt32LE(3)
-			output.writeUInt32LE(4)
+		for (const checkpoint of checkpoints) {
+			if (!checkpoint.medalTimes) throw new Error("Missing Block#medalTimes on checkpoint/goal.")
+			output.writeUInt32LE(checkpoint.medalTimes.platinum)
+			output.writeUInt32LE(checkpoint.medalTimes.gold)
+			output.writeUInt32LE(checkpoint.medalTimes.silver)
+			output.writeUInt32LE(checkpoint.medalTimes.bronze)
 		}
 
 		output.writeFloatLE(this.sunRotationHorizontal)
@@ -283,6 +290,16 @@ export class CelariaMap extends BaseCelariaMap {
 				default:
 					break
 			}
+		})
+
+		checkpoints.forEach((checkpoint, index) => {
+			output.writeUInt8(checkpoint.instanceId)
+			if (index === checkpoints.length - 1) {
+				checkpoint.type = Block.types.goal
+			} else {
+				checkpoint.type = Block.types.checkpoint
+			}
+			CelariaMap.#writeBlock(checkpoint, output, version, index)
 		})
 
 		return output.toBuffer()

@@ -7,3 +7,10 @@ export type FlatVector3 = XYRestrainedVector3 | XZRestrainedVector3
 export type RotationPropertyDocumentation = number
 /** The scale of the object I represent. */
 export type ScalePropertyDocumentation = Vector3
+/** I represent the medal times (in ticks). */
+export interface MedalTimes {
+	platinum: number
+	gold: number
+	silver: number
+	bronze: number
+}
