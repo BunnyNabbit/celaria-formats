@@ -7,11 +7,14 @@ import { OrderedSet } from "../OrderedSet.mjs"
 /** @import {Barrier} from "./objects/Barrier.mjs" */
 /** @import {TutorialHologram} from "./objects/TutorialHologram.mjs" */
 
-/** @todo Yet to be documented. */
+/** I'm a base class for Celaria files and their file formats. I define attributes shared between the editable and finalized formats. */
 export class BaseCelariaMap {
-	/** @todo Yet to be documented. */
+	/**/
 	constructor() {
-		/** @type {(Block | Sphere | PlayerSpawnPoint | Barrier | TutorialHologram)[]} */
+		/**The object instances in the map.
+		 *
+		 * @type {(Block | Sphere | PlayerSpawnPoint | Barrier | TutorialHologram)[]}
+		 */
 		this.instances = []
 		/** @type {number} */
 		this.sunRotationHorizontal = 45
