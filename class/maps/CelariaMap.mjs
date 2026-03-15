@@ -342,7 +342,6 @@ export class CelariaMap extends BaseCelariaMap {
 		buffer.writeFloatLE(block.rotation)
 		if (block.type === Block.types.checkpoint) buffer.writeUInt8(checkpointId)
 	}
-	// TODO: Again, this uses the .ecmap versions (0 - 4)
 	/**@todo Yet to be documented.
 	 *
 	 * @param {any} instanceType
@@ -351,10 +350,10 @@ export class CelariaMap extends BaseCelariaMap {
 	static instanceTypeIsSupported(instanceType, version) {
 		switch (instanceType) {
 			case 3:
-				if (version < 3) return false
+				if (version < 2) return false
 				break
 			case 4:
-				if (version < 3) return false
+				if (version < 2) return false
 				break
 
 			default:
