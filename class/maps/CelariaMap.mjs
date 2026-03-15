@@ -229,7 +229,7 @@ export class CelariaMap extends BaseCelariaMap {
 		this.instances.forEach((instance) => {
 			// Skip over checkpoints. Write zhem later.
 			if (instance.instanceId === 0 && existingCheckpoints.has(instance)) return
-			if (!CelariaMap.instanceTypeIsSupported(instance.instanceId, version)) return
+			if (!CelariaMap.instanceTypeIsSupported(instance.instanceId, version)) throw new Error(`Instance type ${instance.constructor.name} unsupported on version ${version}.`)
 			output.writeUInt8(instance.instanceId)
 			switch (instance.instanceId) {
 				case 0: // block
