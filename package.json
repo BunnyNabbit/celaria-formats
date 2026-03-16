@@ -1,6 +1,6 @@
 {
   "name": "celaria-formats",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Parse and write Celaria file formats.",
   "main": "index.js",
   "type": "module",
