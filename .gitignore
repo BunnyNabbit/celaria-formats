@@ -128,3 +128,5 @@ dist
 
 # Generated documentation
 docs/
+*.d.mts
+*.d.mts.map
