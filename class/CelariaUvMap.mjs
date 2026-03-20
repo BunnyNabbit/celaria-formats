@@ -1,10 +1,12 @@
 // @ts-check
 import { SmartBuffer } from "smart-buffer"
+/** @import {UvData} from "../types/data.mts" */
 /** @todo Yet to be documented. */
 export class CelariaUvMap {
-	/**Yet to be documented.
+	/**Parse the given {@link buffer} to uv data.
 	 *
 	 * @param {Buffer<ArrayBufferLike>} buffer
+	 * @returns {UvData[]}
 	 */
 	static parse(buffer) {
 		const buff = SmartBuffer.fromBuffer(buffer)
@@ -13,6 +15,7 @@ export class CelariaUvMap {
 		if (version !== 0) throw new Error(`Unsupported version ${version}.`)
 		const blockCount = buff.readUInt32LE()
 		const faceCount = buff.readUInt32LE()
+		/** @type {UvData[]} */
 		let uvs = []
 		for (let i = 0; i < faceCount; i++) {
 			uvs.push({

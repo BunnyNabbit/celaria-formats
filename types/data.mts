@@ -10,3 +10,11 @@ export interface MedalTimes {
 	silver: number
 	bronze: number
 }
+export interface UvData {
+	blockId: number
+	faceId: number
+	startX: number
+	startY: number
+	endX: number
+	endY: number
+}
