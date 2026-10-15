@@ -1,7 +1,5 @@
 # CI for Codeberg runners. Difference from '/.github/workflows/ci.yml' is that I remove the Coveralls step. Otherwise, I am pretty much identical to my GitHub counterpart.
 name: Node.js CI
-permissions:
-  contents: read
 
 on:
   push:
