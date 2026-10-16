@@ -7,6 +7,8 @@ export class CelariaUvMap {
 	 *
 	 * @param {Buffer<ArrayBufferLike>} buffer
 	 * @returns {UvData[]}
+	 * @throws {Error} On magic mismatch.
+	 * @throws {Error} On unsupported versions. Only version 0 is supported.
 	 */
 	static parse(buffer) {
 		const buff = SmartBuffer.fromBuffer(buffer)
