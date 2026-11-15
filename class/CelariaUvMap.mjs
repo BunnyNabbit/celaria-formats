@@ -11,22 +11,22 @@ export class CelariaUvMap {
 	 * @throws {Error} On unsupported versions. Only version 0 is supported.
 	 */
 	static parse(buffer) {
-		const buff = SmartBuffer.fromBuffer(buffer)
-		if (buff.readString(7, "ascii") !== CelariaUvMap.fileSignature) throw new Error("Magic mismatch.")
-		const version = buff.readUInt8() // Version
+		const readBuffer = SmartBuffer.fromBuffer(buffer)
+		if (readBuffer.readString(7, "ascii") !== CelariaUvMap.fileSignature) throw new Error("Magic mismatch.")
+		const version = readBuffer.readUInt8()
 		if (version !== 0) throw new Error(`Unsupported version ${version}.`)
-		const blockCount = buff.readUInt32LE()
-		const faceCount = buff.readUInt32LE()
+		const blockCount = readBuffer.readUInt32LE()
+		const faceCount = readBuffer.readUInt32LE()
 		/** @type {UvData[]} */
 		let uvs = []
 		for (let i = 0; i < faceCount; i++) {
 			uvs.push({
-				blockId: buff.readUInt32LE(),
-				faceId: buff.readUInt8(),
-				startX: buff.readFloatLE(),
-				startY: buff.readFloatLE(),
-				endX: buff.readFloatLE(),
-				endY: buff.readFloatLE(),
+				blockId: readBuffer.readUInt32LE(),
+				faceId: readBuffer.readUInt8(),
+				startX: readBuffer.readFloatLE(),
+				startY: readBuffer.readFloatLE(),
+				endX: readBuffer.readFloatLE(),
+				endY: readBuffer.readFloatLE(),
 			})
 		}
 		return uvs
